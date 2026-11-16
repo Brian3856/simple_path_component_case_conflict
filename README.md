@@ -56,3 +56,10 @@ treating it as one would produce false positives on unrelated files.
 
 Empty strings are accepted.  A single empty path is not a conflict; two empty
 paths are, because they describe the same location.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
